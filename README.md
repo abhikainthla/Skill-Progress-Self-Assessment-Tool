@@ -47,7 +47,7 @@ This project solves that by:
 
 ---
 
-## 🖥️ Screenshots (Optional)
+## 🖥️ Screenshots 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/a6c2acfd-badc-43f4-a25e-3512b8ececb2" />
 
 ---
