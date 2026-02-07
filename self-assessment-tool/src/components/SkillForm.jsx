@@ -5,6 +5,7 @@ import {
   Button,
   Text,
   Slider,
+  NativeSelect,
 } from "@chakra-ui/react";
 import {
   NativeSelectRoot,
@@ -53,6 +54,7 @@ const SkillForm = () => {
             </option>
           ))}
         </NativeSelectField>
+        <NativeSelect.Indicator />
       </NativeSelectRoot>
 
       <Text fontWeight="medium">

@@ -1,43 +1,46 @@
+import { Box, Text } from "@chakra-ui/react";
 import {
-  Box,
-  Text,
-  VStack,
-  HStack,
-  Progress,
-} from "@chakra-ui/react";
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const SkillProgress = ({ skill }) => {
   const ratings = skill.ratings || [];
 
-  const average =
-    ratings.length === 0
-      ? 0
-      : (
-          ratings.reduce((sum, r) => sum + r.value, 0) /
-          ratings.length
-        ).toFixed(1);
+  // ✅ Take last 3 ratings
+  const lastThreeRatings = ratings.slice(-3);
 
-  const percentage = (average / 5) * 100;
+  const chartData = lastThreeRatings.map((r, index) => ({
+    name: `Attempt ${ratings.length - lastThreeRatings.length + index + 1}`,
+    rating: r.value,
+  }));
 
   return (
     <Box>
-      <HStack justify="space-between" mb={1}>
-        <Text fontWeight="medium">{skill.name}</Text>
-        <Text fontSize="sm" color="gray.500">
-          {average}/5
-        </Text>
-      </HStack>
+      <Text fontWeight="medium" mb={1}>
+        {skill.name} — Last 3 Ratings
+      </Text>
 
-      <Progress.Root
-        value={percentage}
-        size="sm"
-        colorPalette="blue"
-        borderRadius="md"
-      >
-        <Progress.Track>
-          <Progress.Range />
-        </Progress.Track>
-      </Progress.Root>
+      {chartData.length === 0 ? (
+        <Text color="gray.500">No ratings yet</Text>
+      ) : (
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart data={chartData}>
+            <XAxis dataKey="name" />
+            <YAxis domain={[0, 5]} />
+            <Tooltip />
+            <Bar
+              dataKey="rating"
+              fill="#3182CE"
+              radius={[6, 6, 0, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      )}
     </Box>
   );
 };

@@ -6,6 +6,8 @@ import {
   IconButton,
   Input,
   Button,
+  Dialog,
+  Portal,
 } from "@chakra-ui/react";
 import { Trash2 } from "lucide-react";
 import { useRecoilState } from "recoil";
@@ -44,12 +46,41 @@ const SkillLibraryCard = () => {
         {skills.map((skill) => (
           <HStack key={skill.id} justify="space-between">
             <Text>{skill.name}</Text>
-            <IconButton
-              icon={<Trash2 size={16} />}
+            
+            <Dialog.Root>
+              <Dialog.Trigger  asChild>
+                <IconButton
               variant="ghost"
-              colorScheme="red"
-              onClick={() => deleteSkill(skill.id)}
-            />
+              colorPalette={"red"}
+              
+            ><Trash2 size={16} color="red" />
+            </IconButton>
+              </Dialog.Trigger>
+              <Portal>
+                <Dialog.Backdrop>
+                  <Dialog.Positioner>
+                    <Dialog.Content>
+                      <Dialog.Header>
+                        <Dialog.Title>Delete Skill</Dialog.Title>
+                      </Dialog.Header>
+                      <Dialog.Body>
+                        <p>
+                Are you sure you want to delete this skill?
+              </p>
+                      </Dialog.Body>
+                      <Dialog.Footer>
+                        <Dialog.ActionTrigger asChild>
+                          <Button variant="outline">Cancel</Button>
+                        </Dialog.ActionTrigger>
+                        <Button bg={"red"} onClick={() => deleteSkill(skill.id)}>Delete</Button>
+                      </Dialog.Footer>
+                    </Dialog.Content>
+                  </Dialog.Positioner>
+                </Dialog.Backdrop>
+              </Portal>
+
+            </Dialog.Root>
+            
           </HStack>
         ))}
 
