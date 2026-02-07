@@ -76,12 +76,12 @@ Instead of averaging all ratings:
 ```js
 const lastThreeRatings = ratings.slice(-3);
 ```
-# Clone the repository
-git clone https://github.com/your-username/skill-progress-tracker.git
+## Clone the repository
+git clone https://github.com/abhikainthla/Skill-Progress-Self-Assessment-Tool.git
 
-# Install dependencies
+## Install dependencies
 npm install
 
-# Start development server
+## Start development server
 npm run dev
 
